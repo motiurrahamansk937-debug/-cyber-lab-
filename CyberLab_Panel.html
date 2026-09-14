@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Cyber Lab Panel</title>
+<style>
+body{margin:0;background:#0f172a;color:white;font-family:Arial,sans-serif}
+.wrap{max-width:700px;margin:80px auto;padding:20px}
+.card{background:#1e293b;border-radius:16px;padding:30px;box-shadow:0 10px 30px #0005}
+h1{margin-top:0}
+input{width:65%;padding:14px;border:0;border-radius:8px;margin-top:15px}
+button{padding:14px 20px;border:0;border-radius:8px;background:#2563eb;color:white;cursor:pointer;margin-left:8px}
+#result{margin-top:20px;padding:15px;background:#0f172a;border-radius:8px;color:#86efac}
+.small{color:#94a3b8}
+</style>
+</head>
+<body>
+<div class="wrap">
+<div class="card">
+<h1>🛡️ Cyber Lab Panel</h1>
+<p class="small">Ethical hacking practice — localhost only</p>
+<input id="target" placeholder="http://127.0.0.1:3000">
+<button onclick="testTarget()">Test</button>
+<div id="result">Ready...</div>
+</div>
+</div>
+<script>
+function testTarget(){
+  const value=document.getElementById('target').value.trim();
+  const result=document.getElementById('result');
+  if(!value){result.textContent='⚠️ Local lab target লিখুন';return;}
+  try{
+    const u=new URL(value);
+    const ok=['localhost','127.0.0.1','::1'].includes(u.hostname);
+    result.innerHTML=ok ? '✅ Local lab target accepted: '+value :
+      '🛡️ BLOCKED — শুধু localhost/127.0.0.1 ব্যবহার করুন।';
+  }catch(e){result.textContent='❌ Address ঠিক নয়';}
+}
+</script>
+</body>
+</html>
